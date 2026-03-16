@@ -1,0 +1,40 @@
+function[root]=Secant(x0,x1,step,epes)
+n=1;
+er=1;
+
+if f(x1)*f(x0)<0
+    while(n<=step && er>epes)
+        f_x0=f(x0);
+        f_x1=f(x1);
+
+        
+        if (f(x1)-f(x0)==0)
+            error ('Çannot divide by zero');
+        end
+
+        x2=x1-((f_x1)*(x1-x0))/(f_x1-f_x0);
+
+        er = abs((x2-x1)/x2);
+     
+
+       x0=x1;
+       x1=x2;
+       n=n+1;
+
+       stp(n)=n;
+       error(n)=er;
+       
+    end
+
+    root=x2;
+    figure
+    plot(stp,error)
+    xlabel('Step')
+    ylabel('Error')
+    grid on
+
+else
+
+      warning('there is no root in this interval');
+end
+end
